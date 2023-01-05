@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 // import Navbar from './components/Navbar';
-import Login from './components/Login';
-import Register from './components/Register';
 import WorkoutDirectory from './components/WorkoutDirectory';
 import Workouts from './components/Workouts';
 import CreateWorkout from './components/CreateWorkout';
 import WorkoutLog from './components/WorkoutLog';
+import Login from './components/Login';
+import Register from './components/Register';
+import Account from './components/Account';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import 'react-toastify/dist/ReactToastify.css';
@@ -52,6 +53,7 @@ function App() {
           <Route path='workout-log' element={<WorkoutLog />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/account' element={<Account />} />
         </Routes>
       </Router>
     </ThemeProvider>

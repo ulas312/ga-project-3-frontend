@@ -1,4 +1,9 @@
-import { fallDown as Menu } from 'react-burger-menu';
+import { bubble as Menu } from 'react-burger-menu';
+
+// class Example extends React.Component {
+//   showSettings (event) {
+//     event.preventDefault();
+//   }
 
 const Navbar = () => {
   return (

@@ -5,15 +5,15 @@ const ENDPOINTS = {
   allWorkouts: '/api/workouts',
   singleWorkout: (id) => `/api/workouts/${id}`,
   workoutDirectory: '/api/workout-directory',
-  workoutsByMuscleGroup: (id) => `/api/workout-directory/${id}/workouts`,
+  // workoutsByMuscleGroup: (id) => `/api/workout-directory/${id}/workouts`,
   workoutLog: '/api/workout-log',
-  account: '/api/account/:id',
-  // createReview: (id) => `/api/crafty-beers/${id}/reviews`,
+  account: (userId) => `/api/account/${userId}`,
+  // createReview: (id) => `/api/workouts/${id}/reviews`,
   // singleReview: (workoutId, reviewId) =>
   //   `/api/workouts/${workoutId}/reviews/${reviewId}`,
   login: '/api/login',
   register: '/api/register',
-  // search: (query) => `/api/workouts/search?search=${query}`,
+  search: (query) => `/api/workouts/search?search=${query}`,
   // cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
 };
 

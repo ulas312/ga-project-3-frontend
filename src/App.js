@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
-// import Navbar from './components/Navbar';
+import Navbar from './components/Navbar';
 import WorkoutDirectory from './components/WorkoutDirectory';
 import Workouts from './components/Workouts';
 import CreateWorkout from './components/CreateWorkout';
@@ -36,15 +36,15 @@ const theme = createTheme({
 });
 
 function App() {
-  // const [searchedWorkouts, setSearchedWorkouts] = useState([]);
+  const [searchedWorkouts, setSearchedWorkouts] = useState([]);
 
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        {/* <Navbar
-        setSearchedWorkouts={setSearchedWorkouts}
-        searchedWorkouts={searchedWorkouts}
-      /> */}
+        <Navbar
+          setSearchedWorkouts={setSearchedWorkouts}
+          searchedWorkouts={searchedWorkouts}
+        />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/workout-directory' element={<WorkoutDirectory />} />

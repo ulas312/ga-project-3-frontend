@@ -12,41 +12,59 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { API } from '../lib/api';
+import { AUTH } from '../lib/auth';
+import { NOTIFY } from '../lib/notifications';
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant='body2'
-      color='text.secondary'
-      align='center'
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color='inherit' href='https://mui.com/'>
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+export default function Register() {
+  const navigate = useNavigate();
+  const [formFields, setFormFields] = useState({
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
+  });
 
-const theme = createTheme();
+  const [file, setFile] = useState('');
+  const [error, setError] = useState(false);
 
-export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const handleChange = (e) =>
+    setFormFields({ ...formFields, [e.target.name]: e.target.value });
+
+  const handleFileChange = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
   };
+
+  const handleCreateUser = (e) => {
+    e.preventDefault();
+    const apiReqBody = {
+      ...formFields,
+    };
+    API.POST(API.ENDPOINTS.register, apiReqBody);
+  };
+
+  const loginData = API.POST(API.ENDPOINTS.login, {
+    email: formFields.email,
+    password: formFields.password,
+  });
+
+  AUTH.setToken(loginData.data.token);
+
+  NOTIFY.SUCCESS('Login Success💪🏼');
+  navigate('/workouts');
+
+  const theme = createTheme();
 
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
+        {/* <form onSubmit={handleCreateUser}> */}
         <Box
           sx={{
             marginTop: 8,
@@ -59,12 +77,12 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Sign up
+            Register{' '}
           </Typography>
           <Box
             component='form'
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleCreateUser}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
@@ -75,30 +93,59 @@ export default function SignUp() {
                   required
                   fullWidth
                   id='firstName'
+                  type='text'
                   label='First Name'
+                  value={formFields.firstName}
+                  onChange={handleChange}
+                  error={error}
                   autoFocus
                 />
               </Grid>
+
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
                   id='lastName'
+                  type='text'
                   label='Last Name'
+                  value={formFields.lastName}
+                  onChange={handleChange}
+                  error={error}
                   name='lastName'
                   autoComplete='family-name'
                 />
               </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id='username'
+                  label='Username'
+                  name='username'
+                  type='text'
+                  value={formFields.username}
+                  onChange={handleChange}
+                  error={error}
+                />
+              </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
                   id='email'
+                  type='email'
                   label='Email Address'
                   name='email'
                   autoComplete='email'
+                  value={formFields.email}
+                  onChange={handleChange}
+                  error={error}
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
@@ -108,25 +155,45 @@ export default function SignUp() {
                   type='password'
                   id='password'
                   autoComplete='new-password'
+                  value={formFields.password}
+                  onChange={handleChange}
+                  error={error}
                 />
               </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name='passwordConfirmation'
+                  label='Password Confirmation'
+                  type='password'
+                  id='passwordConfirmation'
+                  value={formFields.passwordConfirmation}
+                  onChange={handleChange}
+                  error={error}
+                />
+              </Grid>
+
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
                     <Checkbox value='allowExtraEmails' color='primary' />
                   }
-                  label='I want to receive inspiration, marketing promotions and updates via email.'
+                  label='I want to be spammed with workout obsessed info.'
                 />
               </Grid>
             </Grid>
+
             <Button
               type='submit'
               fullWidth
               variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Register{' '}
             </Button>
+
             <Grid container justifyContent='flex-end'>
               <Grid item>
                 <Link href='#' variant='body2'>
@@ -136,7 +203,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        {/* </form> */}
       </Container>
     </ThemeProvider>
   );

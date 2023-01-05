@@ -76,7 +76,7 @@ export default function SingleWorkout() {
             </Typography>
 
             {/* <Typography color='text.primary'>
-              {singleWorkout?.muscleGroup.name}
+              {singleWorkout.muscleGroup.name}
             </Typography> */}
           </CardContent>
           <CardActions>

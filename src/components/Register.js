@@ -40,23 +40,41 @@ export default function Register() {
     setFile(e.target.files[0]);
   };
 
-  const handleCreateUser = (e) => {
+  const handleCreateUser = async (e) => {
     e.preventDefault();
-    const apiReqBody = {
-      ...formFields,
-    };
-    API.POST(API.ENDPOINTS.register, apiReqBody);
+    const imageData = new FormData();
+    imageData.append('file', file);
+    imageData.append(
+      'upload_preset',
+      process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+    );
+
+    try {
+      const cloudinaryResponse = await API.POST(
+        API.ENDPOINTS.cloudinary,
+        imageData
+      );
+
+      const apiReqBody = {
+        ...formFields,
+        cloudinaryImageId: cloudinaryResponse.data.public_id,
+      };
+      await API.POST(API.ENDPOINTS.register, apiReqBody);
+
+      const loginData = await API.POST(API.ENDPOINTS.login, {
+        email: formFields.email,
+        password: formFields.password,
+      });
+
+      AUTH.setToken(loginData.data.token);
+
+      NOTIFY.SUCCESS('Login Success💪🏼');
+      navigate('/workouts');
+    } catch (error) {
+      console.log(error);
+      setError(true);
+    }
   };
-
-  const loginData = API.POST(API.ENDPOINTS.login, {
-    email: formFields.email,
-    password: formFields.password,
-  });
-
-  AUTH.setToken(loginData.data.token);
-
-  NOTIFY.SUCCESS('Login Success💪🏼');
-  navigate('/workouts');
 
   const theme = createTheme();
 
@@ -185,6 +203,16 @@ export default function Register() {
               </Grid>
             </Grid>
 
+            <Grid>
+              <TextField
+                size='small'
+                name='profile-picture'
+                id='profile-picture'
+                type='file'
+                onChange={handleFileChange}
+                sx={{ mb: 2 }}
+              />
+            </Grid>
             <Button
               type='submit'
               fullWidth

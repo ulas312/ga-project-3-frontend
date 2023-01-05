@@ -6,7 +6,7 @@ import {
   CardMedia,
   Typography,
   CardActionArea,
-} from 'mui/material';
+} from '@mui/material';
 
 export default function WorkoutCard({
   name,

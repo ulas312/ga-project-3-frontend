@@ -12,9 +12,9 @@ const Navbar = () => {
       <a id='contact' className='menu-item' href='/contact'>
         Contact
       </a>
-      <a onClick={this.showSettings} className='menu-item--small' href=''>
+      {/* <a onClick={this.showSettings} className='menu-item--small' href=''>
         Settings
-      </a>
+      </a> */}
     </Menu>
   );
 };

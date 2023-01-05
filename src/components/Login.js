@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { NOTIFY } from '../lib/notifications';
 import { AUTH } from '../lib/auth';
-import { useAuthenticated } from '../hooks/useAuthenticated';
+// import { useAuthenticated } from '../hooks/useAuthenticated';
 
 import {
   Avatar,
@@ -31,11 +31,11 @@ const Login = () => {
   });
 
   const [error, setError] = useState({ email: false, password: false });
-  const [isLoggedIn] = useAuthenticated();
+  // const [isLoggedIn] = useAuthenticated();
 
-  if (isLoggedIn) {
-    navigate('/');
-  }
+  // if (isLoggedIn) {
+  //   navigate('/');
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();

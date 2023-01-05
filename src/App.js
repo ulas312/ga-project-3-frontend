@@ -36,6 +36,8 @@ const theme = createTheme({
   },
 });
 
+window.Buffer = window.Buffer || require('buffer').Buffer;
+
 function App() {
   const [searchedWorkouts, setSearchedWorkouts] = useState([]);
 

@@ -7,7 +7,7 @@ import { bubble as Menu } from 'react-burger-menu';
 
 const Navbar = () => {
   return (
-    <Menu>
+    <Menu right>
       <a id='home' className='menu-item' href='/'>
         Home
       </a>

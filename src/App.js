@@ -1,10 +1,9 @@
-// import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  fetch('http://localhost:3000/api/workouts')
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+  // fetch('http://localhost:3000/api')
+  //   .then((res) => res.json())
+  //   .then((data) => console.log(data));
 
   return (
     <div className='App'>

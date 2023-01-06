@@ -22,13 +22,16 @@ const Home = () => (
       <Box
         sx={{
           position: 'absolute',
-          top: 50,
+          top: '70vh',
           justify: 'center',
-          left: '45%',
+          left: '46%',
           zIndex: 'tooltip',
         }}
       >
-        <Link to='/workouts'>
+        <Link
+          style={{ color: 'inherit', textDecoration: 'inherit' }}
+          to='/workouts'
+        >
           <Button
             sx={{ border: 3 }}
             color='secondary'

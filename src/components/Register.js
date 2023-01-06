@@ -17,6 +17,8 @@ import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { AUTH } from '../lib/auth';
 import { NOTIFY } from '../lib/notifications';
+import '../styles/RegisterStyling.scss';
+import Abs from '../assets/abs.png';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -79,160 +81,171 @@ export default function Register() {
   const theme = createTheme();
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component='main' maxWidth='xs'>
-        <CssBaseline />
-        {/* <form onSubmit={handleCreateUser}> */}
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component='h1' variant='h5'>
-            Register{' '}
-          </Typography>
+    <>
+      <img src={Abs} alt='pull-ups' />
+      <ThemeProvider theme={theme}>
+        <Container component='main' maxWidth='xs'>
+          <CssBaseline />
+          {/* <form onSubmit={handleCreateUser}> */}
           <Box
-            component='form'
-            noValidate
-            onSubmit={handleCreateUser}
-            sx={{ mt: 3 }}
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete='given-name'
-                  name='firstName'
-                  required
-                  fullWidth
-                  id='firstName'
-                  type='text'
-                  label='First Name'
-                  value={formFields.firstName}
-                  onChange={handleChange}
-                  error={error}
-                  autoFocus
-                />
-              </Grid>
-
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id='lastName'
-                  type='text'
-                  label='Last Name'
-                  value={formFields.lastName}
-                  onChange={handleChange}
-                  error={error}
-                  name='lastName'
-                  autoComplete='family-name'
-                />
-              </Grid>
-
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id='username'
-                  label='Username'
-                  name='username'
-                  type='text'
-                  value={formFields.username}
-                  onChange={handleChange}
-                  error={error}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id='email'
-                  type='email'
-                  label='Email Address'
-                  name='email'
-                  autoComplete='email'
-                  value={formFields.email}
-                  onChange={handleChange}
-                  error={error}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name='password'
-                  label='Password'
-                  type='password'
-                  id='password'
-                  autoComplete='new-password'
-                  value={formFields.password}
-                  onChange={handleChange}
-                  error={error}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name='passwordConfirmation'
-                  label='Password Confirmation'
-                  type='password'
-                  id='passwordConfirmation'
-                  value={formFields.passwordConfirmation}
-                  onChange={handleChange}
-                  error={error}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value='allowExtraEmails' color='primary' />
-                  }
-                  label='I want to be spammed with workout obsessed info.'
-                />
-              </Grid>
-            </Grid>
-
-            <Grid>
-              <TextField
-                size='small'
-                name='profile-picture'
-                id='profile-picture'
-                type='file'
-                onChange={handleFileChange}
-                sx={{ mb: 2 }}
-              />
-            </Grid>
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component='h1' variant='h5' className='text'>
               Register{' '}
-            </Button>
+            </Typography>
+            <Box
+              component='form'
+              noValidate
+              onSubmit={handleCreateUser}
+              sx={{ mt: 3 }}
+            >
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    className='textfield'
+                    autoComplete='given-name'
+                    name='firstName'
+                    required
+                    fullWidth
+                    id='firstName'
+                    type='text'
+                    label='First Name'
+                    value={formFields.firstName}
+                    onChange={handleChange}
+                    error={error}
+                    autoFocus
+                  />
+                </Grid>
 
-            <Grid container justifyContent='flex-end'>
-              <Grid item>
-                <Link href='#' variant='body2'>
-                  Already have an account? Sign in
-                </Link>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    className='textfield'
+                    required
+                    fullWidth
+                    id='lastName'
+                    type='text'
+                    label='Last Name'
+                    value={formFields.lastName}
+                    onChange={handleChange}
+                    error={error}
+                    name='lastName'
+                    autoComplete='family-name'
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    className='textfield'
+                    required
+                    fullWidth
+                    id='username'
+                    label='Username'
+                    name='username'
+                    type='text'
+                    value={formFields.username}
+                    onChange={handleChange}
+                    error={error}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    className='textfield'
+                    required
+                    fullWidth
+                    id='email'
+                    type='email'
+                    label='Email Address'
+                    name='email'
+                    autoComplete='email'
+                    value={formFields.email}
+                    onChange={handleChange}
+                    error={error}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    className='textfield'
+                    required
+                    fullWidth
+                    name='password'
+                    label='Password'
+                    type='password'
+                    id='password'
+                    autoComplete='new-password'
+                    value={formFields.password}
+                    onChange={handleChange}
+                    error={error}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    className='textfield'
+                    required
+                    fullWidth
+                    name='passwordConfirmation'
+                    label='Password Confirmation'
+                    type='password'
+                    id='passwordConfirmation'
+                    value={formFields.passwordConfirmation}
+                    onChange={handleChange}
+                    error={error}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    className='text'
+                    control={
+                      <Checkbox value='allowExtraEmails' color='primary' />
+                    }
+                    label='Spam me with workout info 🏋🏽‍♀️ '
+                  />
+                </Grid>
               </Grid>
-            </Grid>
+
+              <Grid>
+                <TextField
+                  className='textfield'
+                  size='small'
+                  name='profile-picture'
+                  id='profile-picture'
+                  type='file'
+                  onChange={handleFileChange}
+                  sx={{ mb: 2 }}
+                />
+              </Grid>
+              <Button
+                type='submit'
+                fullWidth
+                variant='contained'
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Register{' '}
+              </Button>
+
+              <Grid container justifyContent='flex-end'>
+                <Grid item>
+                  <Link href='#' variant='body2'>
+                    Already have an account? Sign in
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
           </Box>
-        </Box>
-        {/* </form> */}
-      </Container>
-    </ThemeProvider>
+          {/* </form> */}
+        </Container>
+      </ThemeProvider>
+    </>
   );
 }

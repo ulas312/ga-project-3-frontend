@@ -88,7 +88,10 @@ const Navbar = () => {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>
-                <Link to='/'>
+                <Link
+                  style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  to='/'
+                >
                   <Typography
                     variant='h6'
                     color='inherit'
@@ -100,7 +103,10 @@ const Navbar = () => {
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link to='/workouts'>
+                <Link
+                  style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  to='/workouts'
+                >
                   <Typography
                     variant='h6'
                     color='inherit'
@@ -114,7 +120,11 @@ const Navbar = () => {
               {isLoggedIn ? (
                 <>
                   <MenuItem onClick={handleClose}>
-                    <Link to='/' onClick={logout}>
+                    <Link
+                      style={{ color: 'inherit', textDecoration: 'inherit' }}
+                      to='/'
+                      onClick={logout}
+                    >
                       <Typography
                         variant='h6'
                         color='inherit'
@@ -126,7 +136,10 @@ const Navbar = () => {
                     </Link>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
-                    <Link to='workouts/account '>
+                    <Link
+                      style={{ color: 'inherit', textDecoration: 'inherit' }}
+                      to='workouts/account '
+                    >
                       <Typography
                         variant='h6'
                         color='inherit'
@@ -141,7 +154,10 @@ const Navbar = () => {
               ) : (
                 <>
                   <MenuItem onClick={handleClose}>
-                    <Link to='/login'>
+                    <Link
+                      style={{ color: 'inherit', textDecoration: 'inherit' }}
+                      to='/login'
+                    >
                       <Typography
                         variant='h6'
                         color='inherit'
@@ -153,7 +169,10 @@ const Navbar = () => {
                     </Link>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
-                    <Link to='/register'>
+                    <Link
+                      style={{ color: 'inherit', textDecoration: 'inherit' }}
+                      to='/register'
+                    >
                       <Typography
                         variant='h6'
                         color='inherit'

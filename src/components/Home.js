@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 const Home = () => (
   <Grid className='Home' container component='main' sx={{ height: '100vh' }}>
     <Typography
+      align='center'
       component='div'
       variant='body1'
       style={{
@@ -21,25 +22,28 @@ const Home = () => (
       <Box
         sx={{
           position: 'absolute',
-          top: 40,
-          left: '40%',
+          top: 50,
+          justify: 'center',
+          left: '45%',
           zIndex: 'tooltip',
         }}
       >
-        <Button
-          sx={{ border: 3 }}
-          color='secondary'
-          variant='outlined'
-          size='large'
-        >
-          start Lifting
-        </Button>
+        <Link to='/workouts'>
+          <Button
+            sx={{ border: 3 }}
+            color='secondary'
+            variant='outlined'
+            size='large'
+          >
+            start Lifting
+          </Button>
+        </Link>
       </Box>
       <Box
         sx={{
           position: 'absolute',
           top: 0,
-          left: '43%',
+          // left: '50%',
           zIndex: 'modal',
         }}
       >

@@ -11,6 +11,8 @@ import {
   MenuItem,
 } from '@mui/material';
 import { API } from '../lib/api';
+import HomeImage from '../assets/home-background.png';
+import '../styles/Createstyle.scss';
 
 export default function CreateWorkout() {
   const navigate = useNavigate();
@@ -73,151 +75,157 @@ export default function CreateWorkout() {
   };
 
   return (
-    <Container
-      maxWidth='lg'
-      sx={{ display: 'flex', justifyContent: 'center', pt: 5 }}
-    >
-      <form onSubmit={handleSubmit}>
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='text'
-            value={formData.name}
-            onChange={handleChange}
-            error={error}
-            label='Name'
-            name='name'
-          />
-        </Box>
+    <>
+      <h1>ADD WORKOUT</h1>
+      <img src={HomeImage} alt='full-stacked' />
 
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='text'
-            value={formData.image}
-            onChange={handleChange}
-            error={error}
-            label='Image'
-            name='image'
-          />
-        </Box>
-
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='text'
-            value={formData.description}
-            onChange={handleChange}
-            error={error}
-            label='Description'
-            name='description'
-          />
-        </Box>
-
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='number'
-            value={formData.reps}
-            onChange={handleChange}
-            error={error}
-            label='Reps'
-            name='reps'
-          />
-        </Box>
-
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='number'
-            value={formData.sets}
-            onChange={handleChange}
-            error={error}
-            label='Sets'
-            name='sets'
-          />
-        </Box>
-
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='number'
-            value={formData.rest}
-            onChange={handleChange}
-            error={error}
-            label='Rest'
-            name='rest'
-          />
-        </Box>
-
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='text'
-            value={formData.difficulty}
-            onChange={handleChange}
-            error={error}
-            label='Difficulty'
-            name='difficulty'
-          />
-        </Box>
-
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='number'
-            value={formData.totalTime}
-            onChange={handleChange}
-            error={error}
-            label='Total Time'
-            name='totalTime'
-          />
-        </Box>
-
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='number'
-            value={formData.caloriesBurned}
-            onChange={handleChange}
-            error={error}
-            label='Calories Burned'
-            name='caloriesBurned'
-          />
-        </Box>
-
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='text'
-            value={formData.equipmentRequired}
-            onChange={handleChange}
-            error={error}
-            label='Equipment Required'
-            name='equipmentRequired'
-          />
-        </Box>
-        <Box>
-          <FormControl fullWidth>
-            <InputLabel id='muscleGroup'>Muscle Group</InputLabel>
-            <Select
+      <Container
+        maxWidth='lg'
+        sx={{ display: 'flex', justifyContent: 'center', pt: 3 }}
+      >
+        <form onSubmit={handleSubmit}>
+          <Box sx={{ mb: 2 }}>
+            <TextField
               size='small'
-              labelId='muscleGroup'
-              value={formData.muscleGroup}
-              label='Muscle Group'
+              type='text'
+              value={formData.name}
               onChange={handleChange}
-            >
-              <MenuItem value=''>None</MenuItem>
-              {muscleGroups.map((muscleGroup) => (
-                <MenuItem key={muscleGroup._id} value={muscleGroup._id}>
-                  {muscleGroup.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-        <Button type='submit'>Create new workout</Button>
-      </form>
-    </Container>
+              error={error}
+              label='Name'
+              name='name'
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='text'
+              value={formData.image}
+              onChange={handleChange}
+              error={error}
+              label='Image'
+              name='image'
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='text'
+              value={formData.description}
+              onChange={handleChange}
+              error={error}
+              label='Description'
+              name='description'
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='number'
+              value={formData.reps}
+              onChange={handleChange}
+              error={error}
+              label='Reps'
+              name='reps'
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='number'
+              value={formData.sets}
+              onChange={handleChange}
+              error={error}
+              label='Sets'
+              name='sets'
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='number'
+              value={formData.rest}
+              onChange={handleChange}
+              error={error}
+              label='Rest'
+              name='rest'
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='text'
+              value={formData.difficulty}
+              onChange={handleChange}
+              error={error}
+              label='Difficulty'
+              name='difficulty'
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='number'
+              value={formData.totalTime}
+              onChange={handleChange}
+              error={error}
+              label='Total Time'
+              name='totalTime'
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='number'
+              value={formData.caloriesBurned}
+              onChange={handleChange}
+              error={error}
+              label='Calories Burned'
+              name='caloriesBurned'
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='text'
+              value={formData.equipmentRequired}
+              onChange={handleChange}
+              error={error}
+              label='Equipment Required'
+              name='equipmentRequired'
+            />
+          </Box>
+          <Box>
+            <FormControl fullWidth>
+              <InputLabel id='muscleGroup'>Muscle Group</InputLabel>
+              <Select
+                size='small'
+                labelId='muscleGroup'
+                value={formData.muscleGroup}
+                label='Muscle Group'
+                onChange={handleChange}
+              >
+                <MenuItem value=''>None</MenuItem>
+                {muscleGroups.map((muscleGroup) => (
+                  <MenuItem key={muscleGroup._id} value={muscleGroup._id}>
+                    {muscleGroup.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Button type='submit'>Create new workout</Button>
+        </form>
+      </Container>
+      <img src={HomeImage} alt='full-stacked' />
+    </>
   );
 }

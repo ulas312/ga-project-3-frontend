@@ -10,7 +10,6 @@ import WorkoutLog from './components/WorkoutLog';
 import Login from './components/Login';
 import Register from './components/Register';
 import Account from './components/Account';
-
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -55,6 +54,7 @@ function App() {
           setSearchedWorkouts={setSearchedWorkouts}
           searchedWorkouts={searchedWorkouts}
         />
+
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/workout-directory' element={<WorkoutDirectory />} />

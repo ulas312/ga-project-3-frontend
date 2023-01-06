@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Box, alpha, AppBar, Toolbar, styled } from 'mui/material';
-import { API } from '../../lib/api';
+import { API } from '../lib/api';
 import { SearchIcon } from '@mui/icons-material';
 import InputBase from '@mui/material/InputBase';
 

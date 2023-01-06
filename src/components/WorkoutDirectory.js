@@ -1,8 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Typography, CardActionArea } from '@mui/material';
+import { useState } from 'react';
 
 const WorkoutDirectory = () => {
   const navigate = useNavigate();
+  const [selectedWorkouts, setSelectedWorkouts] = useState([]);
+
+  const handleSelect = (workout) => {
+    setSelectedWorkouts([...selectedWorkouts, workout]);
+  };
 
   return (
     <>
@@ -11,18 +17,11 @@ const WorkoutDirectory = () => {
           Home
         </Typography>
       </Link>
+      {/* {workouts.map
       <CardActionArea>
         <Button color='inherit'>Chest, Shoulders, Triceps</Button>
       </CardActionArea>
-      <CardActionArea>
-        <Button color='inherit'>Back & Biceps</Button>
-      </CardActionArea>
-      <CardActionArea>
-        <Button color='inherit'>Legs & Abs</Button>
-      </CardActionArea>
-      <CardActionArea>
-        <Button color='inherit'>Full Body</Button>
-      </CardActionArea>
+      } */}
       <CardActionArea>
         <Button color='inherit'>Submit</Button>
       </CardActionArea>

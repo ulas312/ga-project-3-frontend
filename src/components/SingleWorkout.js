@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import '../styles/images.scss';
 
 import {
   Container,
@@ -34,9 +37,10 @@ export default function SingleWorkout() {
   return (
     <>
       <Container maxWidth='lg' sx={{ display: 'flex' }} className='Workout'>
-        <Box>
+        <ImageListItem key={singleWorkout?.image}>
           <img src={singleWorkout?.image} alt={singleWorkout?.name} />
-        </Box>
+        </ImageListItem>
+
         <Box>
           <CardContent>
             <Typography variant='h5' component='p'>
@@ -44,34 +48,42 @@ export default function SingleWorkout() {
             </Typography>
 
             <Typography color='text.primary' sx={{ fontSize: 15 }} gutterBottom>
-              {singleWorkout.description}
+              <h2>Description:</h2> {singleWorkout.description}
             </Typography>
 
             <Typography color='text.secondary'>
+              <h5>Reps:</h5>
               {singleWorkout?.reps}
             </Typography>
 
             <Typography color='text.secondary'>
+              <h5>Sets:</h5>
               {singleWorkout?.sets}
             </Typography>
 
             <Typography color='text.secondary'>
+              <h5>Rest time:</h5>
               {singleWorkout?.rest}
+              seconds
             </Typography>
 
             <Typography color='text.primary'>
+              <h5>Difficulty Level:</h5>
               {singleWorkout?.difficulty}
             </Typography>
 
             <Typography color='text.primary'>
+              <h5>Time to complete:</h5>
               {singleWorkout?.totalTime}
             </Typography>
 
             <Typography color='text.secondary'>
+              <h5>Calories Burned</h5>
               {singleWorkout?.caloriesBurned}
             </Typography>
 
             <Typography color='text.primary'>
+              <h5>Equipment Required:</h5>
               {singleWorkout?.equipmentRequired}
             </Typography>
 

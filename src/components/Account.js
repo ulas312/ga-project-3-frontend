@@ -1,8 +1,8 @@
 const Account = () => (
   <section className='Home'>
-    <div className='welcome'>
-      <h1>PROFILE PAGE</h1>
-    </div>
+    {/* <div className='welcome'> */}
+    <h1>PROFILE PAGE</h1>
+    {/* </div> */}
   </section>
 );
 

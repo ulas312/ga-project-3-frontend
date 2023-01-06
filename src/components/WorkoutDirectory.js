@@ -1,28 +1,36 @@
-// import { useNavigate, createSearchParams } from 'react-router-dom';
-import { Button, Typography, CardActionArea } from '@mui/material';
-// import { useState } from 'react';
-// import { API } from '../lib/api';
+import { useNavigate, createSearchParams } from 'react-router-dom';
+import { Button, Container, Grid } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { API } from '../lib/api';
+import MuscleCard from './common/MuscleCard';
 
 const WorkoutDirectory = () => {
-  // const navigate = useNavigate();
-  // const [workouts, setWorkouts] = useState(null);
-  // const goToSelectedWorkouts = () =>
-  // navigate({
-  //   pathname: API.ENDPOINTS.workoutsByMuscleGroup,
-  //   search: `?${createSearchParams(workouts.)}`
-  // }) ;
+  const navigate = useNavigate();
+  const [workouts, setWorkouts] = useState(null);
+  const goToSelectedWorkouts = () =>
+    navigate({
+      pathname: API.ENDPOINTS.workoutsByMuscleGroup,
+      search: `?${createSearchParams(
+        workouts.map((workout) => workout.workout.id)
+      )}`,
+    });
 
-  // useEffect(() => {
-  //   API.GET(API.ENDPOINTS.workoutsByMuscleGroup)
-  //   .then(({ data }) => {
-  //     setWorkouts(data);
-  //     console.log(API.ENDPOINTS.workoutsByMuscleGroup);
-  //     console.log(data);
-  //   })
-  //   .catch(({ message, response }) => {
-  //     console.error(message, response);
-  //   });
-  // }, []);
+  useEffect(() => {
+    API.GET(API.ENDPOINTS.workoutsByMuscleGroup)
+      .then(({ data }) => {
+        setWorkouts(data);
+        console.log(API.ENDPOINTS.workoutsByMuscleGroup);
+        console.log(data);
+      })
+      .catch(({ message, response }) => {
+        console.error(message, response);
+      });
+  }, []);
+
+  if (!workouts) {
+    return null;
+  }
+
 
   // const [selectedWorkouts, setSelectedWorkouts] = useState([]);
 
@@ -37,16 +45,22 @@ const WorkoutDirectory = () => {
         <Button color='inherit'>Chest, Shoulders, Triceps</Button>
       </CardActionArea>
       } */}
-      <CardActionArea>
+      <Container maxWidth='lg' sx={{ display: 'flex' }} className='Workout'>
+        {workouts.map((workout) => (
+          <Grid item xs={4} key={workout._id}>
+            <MuscleCard name={workout.name} image={workout.image} />
+          </Grid>
+        ))}
         <Button
+          onClick={goToSelectedWorkouts}
           sx={{ border: 3 }}
           color='secondary'
           variant='outlined'
           size='large'
         >
-          Select Exercises
+          Choose Your Exercises!
         </Button>
-      </CardActionArea>
+      </Container>
     </>
   );
 };

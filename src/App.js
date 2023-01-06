@@ -29,6 +29,13 @@ const theme = createTheme({
     error: {
       main: '#000000',
     },
+    overrides: {
+      MuiAppBar: {
+        colorPrimary: {
+          backgroundColor: '#000000',
+        },
+      },
+    },
   },
   typography: {
     fontFamily: '"Bebas Neue", "Helvetica", "Arial", sans-serif',

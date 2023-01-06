@@ -6,20 +6,19 @@ import MuscleCard from './common/MuscleCard';
 
 const WorkoutDirectory = () => {
   const navigate = useNavigate();
-  const [workoutsFromGroup, setWorkoutsFromGroup] = useState(null);
   const [workouts, setWorkouts] = useState(null);
   const goToSelectedWorkouts = () =>
     navigate({
       pathname: API.ENDPOINTS.workoutsByMuscleGroup,
       search: `?${createSearchParams(
-        workoutsFromGroup.map((workout) => workout.workout.id)
+        workouts.map((workout) => workout.workout.id)
       )}`,
     });
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.workoutsByMuscleGroup)
       .then(({ data }) => {
-        setWorkoutsFromGroup(data);
+        setWorkouts(data);
         console.log(API.ENDPOINTS.workoutsByMuscleGroup);
         console.log(data);
       })
@@ -28,17 +27,10 @@ const WorkoutDirectory = () => {
       });
   }, []);
 
-  useEffect(() => {
-    API.GET(API.ENDPOINTS.allWorkouts)
-      .then(({ data }) => {
-        setWorkouts(data);
-        console.log(API.ENDPOINTS.allWorkouts);
-        console.log(data);
-      })
-      .catch(({ message, response }) => {
-        console.error(message, response);
-      });
-  }, []);
+  if (!workouts) {
+    return null;
+  }
+
 
   // const [selectedWorkouts, setSelectedWorkouts] = useState([]);
 

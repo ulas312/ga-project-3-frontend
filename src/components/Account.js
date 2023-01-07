@@ -17,6 +17,13 @@ import {
   Avatar,
   ImageListItem,
   ImageList,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from '@mui/material';
 
 const commonStyles = {
@@ -27,6 +34,12 @@ const commonStyles = {
   width: '12.5rem',
   height: '12.5rem',
 };
+
+function createData(name, height, weight, startWeight, goalWeight, bmi) {
+  return { name, height, weight, startWeight, goalWeight, bmi };
+}
+
+const rows = [createData('Ulas Temel', 181, 106, 110, 90, 32)];
 
 const itemData = [
   {
@@ -160,16 +173,48 @@ const Account = () => (
           position: 'absolute',
           top: '50vh',
           justify: 'center',
-          left: '40%',
+          left: '35%',
           // zIndex: 'tooltip',
           mt: 4,
           mb: 20,
-          height: 100,
-          width: 400,
+          // height: 100,
+          // width: 800,
+          height: 400,
+          width: '50%',
         }}
       >
         <Grid sx={{ backgroundColor: 'pink' }}>
-          <h1>text</h1>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+              <TableHead>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell align='left'>Height&nbsp;(cm)</TableCell>
+                  <TableCell align='left'>Weight&nbsp;(kg)</TableCell>
+                  <TableCell align='left'>Starting Weight&nbsp;(kg)</TableCell>
+                  <TableCell align='left'>Goal Weight&nbsp;(kg)</TableCell>
+                  <TableCell align='left'>BMI&nbsp;</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow
+                    key={row.name}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component='th' scope='row'>
+                      {row.name}
+                    </TableCell>
+                    <TableCell align='left'>&ensp;{row.height}</TableCell>
+                    <TableCell align='left'>&ensp;{row.weight}</TableCell>
+                    <TableCell align='left'>&ensp;{row.startWeight}</TableCell>
+                    <TableCell align='left'>&ensp;{row.goalWeight}</TableCell>
+                    <TableCell align='left'>&ensp;{row.bmi}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Grid>
       </Box>
       {/* pink */}

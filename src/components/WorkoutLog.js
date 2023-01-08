@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import ImageUploading from 'react-images-uploading';
+
 import { useNavigate } from 'react-router-dom';
 import WorkoutLogText from '../assets/workout-log.png';
 import { API } from '../lib/api';
@@ -42,6 +44,18 @@ export default function WorkoutLog() {
     height: '12.5rem',
   };
 
+  function createData(name, weight, sets, reps, kcals) {
+    return { name, weight, sets, reps, kcals };
+  }
+
+  const [images, setImages] = React.useState([]);
+  const maxNumber = 69;
+  const onChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    console.log(imageList, addUpdateIndex);
+    setImages(imageList);
+  };
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     dateTimePicker: '',
@@ -75,15 +89,10 @@ export default function WorkoutLog() {
       ? formData
       : {
           name: formData.name,
-          image: formData.image,
-          description: formData.description,
-          reps: formData.reps,
+          weight: formData.weight,
           sets: formData.sets,
-          rest: formData.rest,
-          difficulty: formData.difficulty,
-          totalTime: formData.totalTime,
+          reps: formData.reps,
           caloriesBurned: formData.caloriesBurned,
-          muscleGroup: formData.muscleGroup,
         };
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -93,7 +102,7 @@ export default function WorkoutLog() {
       setValue(newValue);
     };
 
-    API.POST(API.ENDPOINTS.allWorkouts, data, API.getHeaders())
+    API.GET(API.ENDPOINTS.allWorkouts, data, API.getHeaders())
       .then(({ data }) => {
         navigate(`/workouts/${data._id}`);
       })
@@ -107,15 +116,8 @@ export default function WorkoutLog() {
 
   return (
     <>
-      <Box sx={{ backgroundColor: 'white' }}>
-        <Grid
-          container
-          spacing={0}
-          direction='column'
-          alignItems='center'
-          justify='center'
-          style={{ minHeight: '100vh' }}
-        ></Grid>
+      <Box sx={{ backgroundColor: 'black', flexGrow: 1 }}>
+        <Grid container style={{ minHeight: '100vh' }}></Grid>
         {/* title */}
         <Box
           component='img'
@@ -135,39 +137,21 @@ export default function WorkoutLog() {
         />
         {/* end of title */}
 
-        {/* Table */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '30vh',
-            justify: 'center',
-            left: '35%',
-            // zIndex: 'tooltip',
-            mt: 4,
-            mb: 20,
-            // height: 100,
-            // width: 800,
-            height: 400,
-            width: '30%',
-          }}
-        >
-          <Container
-            maxWidth='lg'
-            sx={{ display: 'flex', justifyContent: 'center', pt: 3 }}
-          >
-            <form onSubmit={handleSubmit}>
-              {/* <Box sx={{ mb: 2 }}>
-                <TextField
-                  size='small'
-                  type='text'
-                  value={formData.image}
-                  onChange={handleChange}
-                  error={error}
-                  label='Image'
-                  name='image'
-                />
-              </Box> */}
-
+        <Grid container spacing={2}>
+          {/* new table */}
+          <Grid item xs={8}>
+            <Box
+              component={Paper}
+              sx={{
+                position: 'absolute',
+                top: '25vh',
+                justify: 'center',
+                left: '4%',
+                pt: 2,
+                pb: 2,
+                width: '60%',
+              }}
+            >
               <Box sx={{ mb: 2 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Stack spacing={3}>
@@ -181,114 +165,192 @@ export default function WorkoutLog() {
                 </LocalizationProvider>
               </Box>
 
-              <Box sx={{ mb: 2 }}>
-                <TextField
-                  size='small'
-                  type='number'
-                  value={formData.reps}
-                  onChange={handleChange}
-                  error={error}
-                  label='Weight Used (kg)'
-                  name='weightUsed'
-                />
-              </Box>
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Exercise</TableCell>
+                      <TableCell align='center'>Weight&nbsp;(kg)</TableCell>
+                      <TableCell align='center'>Sets</TableCell>
+                      <TableCell align='center'>Reps</TableCell>
+                      <TableCell align='center'>Kcals&nbsp;Burned</TableCell>
+                    </TableRow>
+                  </TableHead>
 
-              <Box sx={{ mb: 2 }}>
-                <TextField
-                  size='small'
-                  type='number'
-                  value={formData.reps}
-                  onChange={handleChange}
-                  error={error}
-                  label='Reps'
-                  name='reps'
-                />
-              </Box>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell component='th' scope='row'>
+                        <Box
+                          component='form'
+                          sx={{ '& > :not(style)': { m: 1, width: '30ch' } }}
+                          noValidate
+                          autoComplete='off'
+                        >
+                          <FormControl fullWidth>
+                            <InputLabel id='muscleGroup'>
+                              Select Exercise
+                            </InputLabel>
+                            <Select
+                              size='small'
+                              labelId='muscleGroup'
+                              value={formData.muscleGroup}
+                              label='Muscle Group'
+                              onChange={handleChange}
+                            >
+                              <MenuItem value=''>None</MenuItem>
+                              {muscleGroups.map((muscleGroup) => (
+                                <MenuItem
+                                  key={muscleGroup._id}
+                                  value={muscleGroup._id}
+                                >
+                                  {muscleGroup.name}
+                                </MenuItem>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        </Box>
+                      </TableCell>
 
-              <Box sx={{ mb: 2 }}>
-                <TextField
-                  size='small'
-                  type='number'
-                  value={formData.sets}
-                  onChange={handleChange}
-                  error={error}
-                  label='Sets'
-                  name='sets'
-                />
-              </Box>
+                      <TableCell align='center'>
+                        <Box
+                          component='form'
+                          sx={{
+                            '& > :not(style)': { m: 1, width: '5ch' },
+                          }}
+                          noValidate
+                          autoComplete='off'
+                        >
+                          <TextField
+                            id='standard-basic'
+                            label='0'
+                            variant='standard'
+                          />
+                        </Box>
+                      </TableCell>
 
-              <Box sx={{ mb: 2 }}>
-                <TextField
-                  size='small'
-                  type='number'
-                  value={formData.rest}
-                  onChange={handleChange}
-                  error={error}
-                  label='Rest (seconds)'
-                  name='rest'
-                />
-              </Box>
+                      <TableCell align='center'>
+                        <Box
+                          component='form'
+                          sx={{
+                            '& > :not(style)': { m: 1, width: '5ch' },
+                          }}
+                          noValidate
+                          autoComplete='off'
+                        >
+                          <TextField
+                            id='standard-basic'
+                            label='0'
+                            variant='standard'
+                          />
+                        </Box>
+                      </TableCell>
+                      <TableCell align='center'>
+                        <Box
+                          component='form'
+                          sx={{
+                            '& > :not(style)': { m: 1, width: '5ch' },
+                          }}
+                          noValidate
+                          autoComplete='off'
+                        >
+                          <TextField
+                            id='standard-basic'
+                            label='0'
+                            variant='standard'
+                          />
+                        </Box>
+                      </TableCell>
 
-              <Box sx={{ mb: 2 }}>
-                <TextField
-                  size='small'
-                  type='text'
-                  value={formData.difficulty}
-                  onChange={handleChange}
-                  error={error}
-                  label='Difficulty'
-                  name='difficulty'
-                />
-              </Box>
+                      <TableCell align='center'>
+                        <Box
+                          component='form'
+                          sx={{
+                            '& > :not(style)': { m: 1, width: '5ch' },
+                          }}
+                          noValidate
+                          autoComplete='off'
+                        >
+                          <TextField
+                            id='standard-basic'
+                            label='0'
+                            variant='standard'
+                          />
+                        </Box>
+                      </TableCell>
+                    </TableRow>
 
-              <Box sx={{ mb: 2 }}>
-                <TextField
-                  size='small'
-                  type='number'
-                  value={formData.totalTime}
-                  onChange={handleChange}
-                  error={error}
-                  label='Total Time'
-                  name='totalTime'
-                />
-              </Box>
+                    <TableRow>
+                      <Box>
+                        <Stack>
+                          <Button variant='contained' color='secondary'>
+                            Upload Workout
+                          </Button>
+                        </Stack>
+                      </Box>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
+            {/* end new table */}
+          </Grid>
 
-              <Box sx={{ mb: 2 }}>
-                <TextField
-                  size='small'
-                  type='number'
-                  value={formData.caloriesBurned}
-                  onChange={handleChange}
-                  error={error}
-                  label='Calories Burned'
-                  name='caloriesBurned'
-                />
-              </Box>
-
-              <Box>
-                <FormControl fullWidth>
-                  <InputLabel id='muscleGroup'>Muscle Group</InputLabel>
-                  <Select
-                    size='small'
-                    labelId='muscleGroup'
-                    value={formData.muscleGroup}
-                    label='Muscle Group'
-                    onChange={handleChange}
-                  >
-                    <MenuItem value=''>None</MenuItem>
-                    {muscleGroups.map((muscleGroup) => (
-                      <MenuItem key={muscleGroup._id} value={muscleGroup._id}>
-                        {muscleGroup.name}
-                      </MenuItem>
+          {/* upload image */}
+          <Grid
+            item
+            xs={4}
+            sx={{
+              position: 'absolute',
+              top: '50vh',
+              justify: 'center',
+              left: '78%',
+              pt: 2,
+              pb: 2,
+              width: '60%',
+            }}
+          >
+            <div className='App'>
+              <ImageUploading
+                multiple
+                value={images}
+                onChange={onChange}
+                maxNumber={maxNumber}
+                dataURLKey='data_url'
+                acceptType={['jpg']}
+              >
+                {({
+                  imageList,
+                  onImageUpload,
+                  onImageUpdate,
+                  isDragging,
+                  dragProps,
+                }) => (
+                  <div className='upload__image-wrapper'>
+                    <button
+                      style={isDragging ? { color: 'red' } : null}
+                      onClick={onImageUpload}
+                      {...dragProps}
+                    >
+                      Upload Image
+                    </button>
+                    &nbsp;
+                    {imageList.map((image, index) => (
+                      <div key={index} className='image-item'>
+                        <img src={image.data_url} alt='' width='100' />
+                        <div className='image-item__btn-wrapper'>
+                          <button onClick={() => onImageUpdate(index)}>
+                            Update
+                          </button>
+                        </div>
+                      </div>
                     ))}
-                  </Select>
-                </FormControl>
-              </Box>
-              <Button type='submit'>Create new workout</Button>
-            </form>
-          </Container>
-        </Box>
-        {/* End of table */}
+                  </div>
+                )}
+              </ImageUploading>
+            </div>
+          </Grid>
+          {/* upload image */}
+        </Grid>
       </Box>
     </>
   );

@@ -2,24 +2,33 @@ import { useNavigate, createSearchParams } from 'react-router-dom';
 import { Button, Container, Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { API } from '../lib/api';
-import MuscleCard from './common/MuscleCard';
+// import MuscleCard from './common/MuscleCard';
 
 const WorkoutDirectory = () => {
   const navigate = useNavigate();
   const [workouts, setWorkouts] = useState(null);
+  const [selectedMuscleGroups, setSelectedMuscleGroups] = useState([]);
+
+  const handleSelect = (muscleGroup) => {
+    if (!selectedMuscleGroups.includes(muscleGroup)) {
+      setSelectedMuscleGroups([...selectedMuscleGroups, muscleGroup]);
+      console.log(selectedMuscleGroups);
+    }
+  };
+
   const goToSelectedWorkouts = () =>
     navigate({
-      pathname: API.ENDPOINTS.workoutsByMuscleGroup,
-      search: `?${createSearchParams(
-        workouts.map((workout) => workout.workout.id)
-      )}`,
+      pathname: API.ENDPOINTS.workoutDirectory,
+      search: `?${createSearchParams({
+        muscleGroups: selectedMuscleGroups,
+      })}`,
     });
 
   useEffect(() => {
-    API.GET(API.ENDPOINTS.workoutsByMuscleGroup)
+    API.GET(API.ENDPOINTS.workoutDirectory)
       .then(({ data }) => {
         setWorkouts(data);
-        console.log(API.ENDPOINTS.workoutsByMuscleGroup);
+        console.log(API.ENDPOINTS.workoutDirectory);
         console.log(data);
       })
       .catch(({ message, response }) => {
@@ -31,34 +40,37 @@ const WorkoutDirectory = () => {
     return null;
   }
 
-
-  // const [selectedWorkouts, setSelectedWorkouts] = useState([]);
-
-  // const handleSelect = (workout) => {
-  //   setSelectedWorkouts([...selectedWorkouts, workout]);
-  // };
-
   return (
     <>
-      {/* {workouts.map
-      <CardActionArea>
-        <Button color='inherit'>Chest, Shoulders, Triceps</Button>
-      </CardActionArea>
-      } */}
-      <Container maxWidth='lg' sx={{ display: 'flex' }} className='Workout'>
-        {workouts.map((workout) => (
-          <Grid item xs={4} key={workout._id}>
-            <MuscleCard name={workout.name} image={workout.image} />
-          </Grid>
-        ))}
+      <Container maxWidth='lg'>
+        <Grid container spacing={2}>
+          {workouts?.map((workout) => (
+            <Grid item xs={4} key={workout._id}>
+              {/* <MuscleCard
+                name={workout.name}
+                image={workout.image}
+                onClick={() => handleSelect(`${workout.name}`)}
+              /> */}
+              <Button
+                color='secondary'
+                variant='outlined'
+                name={workout.name}
+                image={workout.image}
+                onClick={() => handleSelect(`${workout.workout}`)}
+              >
+                {workout.name}
+              </Button>
+            </Grid>
+          ))}
+        </Grid>
         <Button
-          onClick={goToSelectedWorkouts}
           sx={{ border: 3 }}
           color='secondary'
           variant='outlined'
           size='large'
+          onClick={goToSelectedWorkouts}
         >
-          Choose Your Exercises!
+          Go To Exercises!
         </Button>
       </Container>
     </>

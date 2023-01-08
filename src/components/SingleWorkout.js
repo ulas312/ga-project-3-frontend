@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
+import { ImageListItem } from '@mui/material';
+
+import '../styles/images.scss';
 
 import {
   Container,
@@ -29,63 +32,80 @@ export default function SingleWorkout() {
     setIsUpdated(false);
   }, [id, isUpdated]);
 
-  const goToDirectory = () => navigate('/workout-directory');
+  const goToDirectory = () => navigate('/workouts');
 
   return (
     <>
-      <Container maxWidth='lg' sx={{ display: 'flex' }} className='Workout'>
-        <Box>
-          <img src={singleWorkout?.image} alt={singleWorkout?.name} />
-        </Box>
-        <Box>
-          <CardContent>
-            <Typography variant='h5' component='p'>
-              {singleWorkout?.name}
-            </Typography>
+      <div className='background'>
+        <Container
+          maxWidth='400px'
+          sx={{ display: 'flex', pt: 15 }}
+          className='Workout'
+        >
+          <Box className='info'>
+            <CardContent>
+              <Typography
+                variant='h5'
+                component='p'
+                style={{ font: 12, color: 'gray' }}
+              >
+                {singleWorkout?.name}
+              </Typography>
 
-            <Typography color='text.primary' sx={{ fontSize: 15 }} gutterBottom>
-              {singleWorkout.description}
-            </Typography>
+              <Typography color='gray' sx={{ fontSize: 15 }} gutterBottom>
+                {singleWorkout.description}
+              </Typography>
 
-            <Typography color='text.secondary'>
-              {singleWorkout?.reps}
-            </Typography>
+              <Typography color='gray' sx={{ fontSize: 15 }}>
+                Aim for: {singleWorkout?.reps} reps /{singleWorkout?.sets} sets
+              </Typography>
 
-            <Typography color='text.secondary'>
-              {singleWorkout?.sets}
-            </Typography>
+              <Typography color='gray' sx={{ fontSize: 15 }}>
+                <h5>Rest time: {singleWorkout?.rest} seconds</h5>
+              </Typography>
 
-            <Typography color='text.secondary'>
-              {singleWorkout?.rest}
-            </Typography>
+              <Typography color='gray' sx={{ fontSize: 15 }}>
+                <h5>Difficulty Level: {singleWorkout?.difficulty}</h5>
+              </Typography>
 
-            <Typography color='text.primary'>
-              {singleWorkout?.difficulty}
-            </Typography>
+              <Typography color='gray' sx={{ fontSize: 15 }}>
+                <h5>Time to complete: {singleWorkout?.totalTime} minutes</h5>
+              </Typography>
 
-            <Typography color='text.primary'>
-              {singleWorkout?.totalTime}
-            </Typography>
+              <Typography color='gray' sx={{ fontSize: 15 }}>
+                <h5>Calories Burned: {singleWorkout?.caloriesBurned}</h5>
+              </Typography>
 
-            <Typography color='text.secondary'>
-              {singleWorkout?.caloriesBurned}
-            </Typography>
+              <Typography color='gray' sx={{ fontSize: 15 }}>
+                <h5>Equipment Required: {singleWorkout?.equipmentRequired}</h5>
+              </Typography>
 
-            <Typography color='text.primary'>
-              {singleWorkout?.equipmentRequired}
-            </Typography>
-
-            {/* <Typography color='text.primary'>
+              {/* <Typography color='text.primary'>
               {singleWorkout.muscleGroup.name}
             </Typography> */}
-          </CardContent>
-          <CardActions>
-            <Button size='small' onClick={goToDirectory}>
-              Take me to the Workout Directory
-            </Button>
-          </CardActions>
-        </Box>
-      </Container>
+            </CardContent>
+            <CardActions>
+              <Button className='Button' size='small' onClick={goToDirectory}>
+                🔙
+              </Button>
+            </CardActions>
+          </Box>
+          <ImageListItem key={singleWorkout?.image}>
+            <img
+              style={{
+                width: 800,
+                height: 400,
+                padding: 100,
+                // borderRadius: '45%',
+                objectFit: 'cover',
+              }}
+              src={singleWorkout?.image}
+              alt={singleWorkout?.name}
+            />
+          </ImageListItem>
+        </Container>
+      </div>
+      <footer></footer>
     </>
   );
 }

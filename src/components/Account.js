@@ -1,9 +1,7 @@
 import * as React from 'react';
 import AccountText from '../assets/account-text-white.png';
 import ProfilePic from '../assets/profile-pic.jpg';
-import legs from '../assets/legs.png';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-// import 'react-lazy-load-image-component/src/effects/blur.css';
+// import legs from '../assets/legs.png';
 
 import {
   Container,
@@ -29,8 +27,6 @@ import {
 const commonStyles = {
   bgcolor: 'background.paper',
   borderColor: 'text.primary',
-  // m: 1,
-  // border: 1,
   width: '12.5rem',
   height: '12.5rem',
 };
@@ -41,22 +37,22 @@ function createData(height, weight, bmi) {
 }
 const rows = [createData(181, 106, 32)];
 
-const itemData = [
+const photoReel = [
   {
     img: 'https://images.unsplash.com/photo-1549476464-37392f717541',
-    title: 'Breakfast',
+    title: 'selfie',
   },
   {
     img: 'https://images.unsplash.com/photo-1605296866985-34ba3c0b527b',
-    title: 'Burger',
+    title: 'selfie',
   },
   {
     img: 'https://images.unsplash.com/photo-1605300287659-9ca1a156d7c8',
-    title: 'Camera',
+    title: 'selfie',
   },
   {
     img: 'https://images.unsplash.com/photo-1600026453346-a44501602a02',
-    title: 'Camera',
+    title: 'selfie',
   },
 ];
 
@@ -64,7 +60,7 @@ const Account = () => (
   <>
     <Box sx={{ backgroundColor: 'black' }}>
       {/* title */}
-      {/* <Box
+      <Box
         component='img'
         sx={{
           position: 'absolute',
@@ -79,14 +75,14 @@ const Account = () => (
         }}
         alt='Account page text'
         src={AccountText}
-      /> */}
+      />
       {/* end of title */}
       {/* image slide */}
       <Box
         sx={{
           // backgroundColor: 'pink',
           position: 'absolute',
-          top: '10vh',
+          top: '23vh',
           justify: 'center',
           left: '15%',
           // zIndex: 'tooltip',
@@ -104,7 +100,7 @@ const Account = () => (
               cols={4}
               rowHeight={164}
             >
-              {itemData.map((item) => (
+              {photoReel.map((item) => (
                 <ImageListItem key={item.img}>
                   <img
                     src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
@@ -124,7 +120,7 @@ const Account = () => (
       <Box
         sx={{
           position: 'absolute',
-          top: '40vh',
+          top: '59vh',
           justify: 'center',
           left: '15%',
           // zIndex: 'tooltip',
@@ -171,14 +167,11 @@ const Account = () => (
       <Box
         sx={{
           position: 'absolute',
-          top: '50vh',
+          top: '65vh',
           justify: 'center',
           left: '38%',
-          // zIndex: 'tooltip',
           mt: 4,
           mb: 20,
-          // height: 100,
-          // width: 800,
           height: 400,
           width: '36%',
         }}
@@ -218,17 +211,7 @@ const Account = () => (
         justify='center'
         style={{ minHeight: '100vh' }}
         // sx={{ backgroundColor: 'black' }}
-      >
-        <Card>
-          {/* <LazyLoadImage alt={legs.alt} effect='blur' src={legs} /> */}
-          {/* <LazyLoadImage
-          alt={legs.alt}
-          height={legs.height}
-          src={legs} // use normal <img> attributes as props
-          width={legs.width}
-        /> */}
-        </Card>
-      </Grid>
+      ></Grid>
     </Box>
   </>
 );

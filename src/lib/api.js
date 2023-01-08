@@ -5,7 +5,7 @@ const ENDPOINTS = {
   allWorkouts: '/api/workouts',
   singleWorkout: (id) => `/api/workouts/${id}`,
   workoutDirectory: '/api/workout-directory',
-  workoutsByMuscleGroup: (id) => `/api/workout-directory?muscleGroups=${id}`,
+  workoutsBySelectedMuscleGroup: `/api/workout-directory/workouts`,
   workoutLog: '/api/workout-log',
   account: (userId) => `/api/account/${userId}`,
   // createReview: (id) => `/api/workouts/${id}/reviews`,

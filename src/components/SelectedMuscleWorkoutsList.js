@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 
@@ -6,19 +7,23 @@ import { Container, Grid } from '@mui/material';
 import WorkoutCard from './common/WorkoutCard';
 
 const SelectedMuscleWorkoutsList = ({ searchedWorkouts }) => {
+  const [params] = useSearchParams();
   const [workouts, setWorkouts] = useState(null);
 
   useEffect(() => {
-    API.GET(API.ENDPOINTS.allWorkouts)
+    API.GET(
+      `${API.ENDPOINTS.workoutsBySelectedMuscleGroup}?muscleGroups=${params.get(
+        'muscleGroups'
+      )}`
+    )
       .then(({ data }) => {
         setWorkouts(data);
-        console.log(API.ENDPOINTS.allWorkouts);
         console.log(data);
       })
       .catch(({ message, response }) => {
         console.error(message, response);
       });
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     setWorkouts(searchedWorkouts);

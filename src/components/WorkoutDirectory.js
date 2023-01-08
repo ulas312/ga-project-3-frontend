@@ -10,26 +10,26 @@ const WorkoutDirectory = () => {
   const [selectedMuscleGroups, setSelectedMuscleGroups] = useState([]);
 
   const handleSelect = (muscleGroup) => {
-    if (!selectedMuscleGroups.includes(muscleGroup)) {
-      setSelectedMuscleGroups([...selectedMuscleGroups, muscleGroup]);
-      console.log(selectedMuscleGroups);
+    const groupArr = muscleGroup.split(',');
+    if (!selectedMuscleGroups.some((i) => groupArr.includes(i))) {
+      setSelectedMuscleGroups([...selectedMuscleGroups, ...groupArr]);
     }
   };
+  console.log(selectedMuscleGroups);
 
-  const goToSelectedWorkouts = () =>
+  const goToSelectedWorkouts = () => {
     navigate({
-      pathname: API.ENDPOINTS.workoutDirectory,
+      pathname: '/workout-directory/workouts',
       search: `?${createSearchParams({
-        muscleGroups: selectedMuscleGroups,
+        muscleGroups: selectedMuscleGroups.join(','),
       })}`,
     });
+  };
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.workoutDirectory)
       .then(({ data }) => {
         setWorkouts(data);
-        console.log(API.ENDPOINTS.workoutDirectory);
-        console.log(data);
       })
       .catch(({ message, response }) => {
         console.error(message, response);

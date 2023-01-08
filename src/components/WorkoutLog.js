@@ -1,51 +1,295 @@
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import WorkoutLogText from '../assets/workout-log.png';
+import { API } from '../lib/api';
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'exercises', headerName: 'Exercises', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 90,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
-];
+import dayjs from 'dayjs';
 
-const rows = [
-  { id: 1, lastName: 'Snow', exercises: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', exercises: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', exercises: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', exercises: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', exercises: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', exercises: null, age: 150 },
-  { id: 7, lastName: 'Clifford', exercises: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', exercises: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', exercises: 'Harvey', age: 65 },
-];
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import {
+  Container,
+  Box,
+  Card,
+  CardContent,
+  Button,
+  Typography,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Stack,
+} from '@mui/material';
 
-const WorkoutLog = () => {
+export default function WorkoutLog() {
+  const commonStyles = {
+    bgcolor: 'background.paper',
+    borderColor: 'text.primary',
+    // m: 1,
+    // border: 1,
+    width: '12.5rem',
+    height: '12.5rem',
+  };
+
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    dateTimePicker: '',
+    weightUsed: 0,
+    reps: 0,
+    sets: 0,
+    rest: 0,
+    difficulty: '',
+    totalTime: 0,
+    caloriesBurned: 0,
+    muscleGroup: '',
+  });
+
+  const [error, setError] = useState(false);
+  const [muscleGroups, setMuscleGroups] = useState(['']);
+
+  useEffect(() => {
+    API.GET(API.ENDPOINTS.allWorkouts)
+      .then(({ data }) => setMuscleGroups(data))
+      .catch((e) => console.log(e));
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = formData.muscleGroup
+      ? formData
+      : {
+          name: formData.name,
+          image: formData.image,
+          description: formData.description,
+          reps: formData.reps,
+          sets: formData.sets,
+          rest: formData.rest,
+          difficulty: formData.difficulty,
+          totalTime: formData.totalTime,
+          caloriesBurned: formData.caloriesBurned,
+          muscleGroup: formData.muscleGroup,
+        };
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
+
+    const handleChange = (newValue) => {
+      setValue(newValue);
+    };
+
+    API.POST(API.ENDPOINTS.allWorkouts, data, API.getHeaders())
+      .then(({ data }) => {
+        navigate(`/workouts/${data._id}`);
+      })
+      .catch((e) => {
+        if (e.status === 301) {
+          setError(true);
+        }
+        console.log(e);
+      });
+  };
+
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        // checkboxSelection
-      />
-    </div>
-  );
-};
+    <>
+      <Box sx={{ backgroundColor: 'white' }}>
+        <Grid
+          container
+          spacing={0}
+          direction='column'
+          alignItems='center'
+          justify='center'
+          style={{ minHeight: '100vh' }}
+        ></Grid>
+        {/* title */}
+        <Box
+          component='img'
+          sx={{
+            position: 'absolute',
+            top: '8vh',
+            justify: 'center',
+            left: '40%',
+            // zIndex: 'tooltip',
+            mt: 4,
+            mb: 20,
+            height: 100,
+            width: 400,
+          }}
+          alt='Workout log text'
+          src={WorkoutLogText}
+        />
+        {/* end of title */}
 
-export default WorkoutLog;
+        {/* Table */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '30vh',
+            justify: 'center',
+            left: '35%',
+            // zIndex: 'tooltip',
+            mt: 4,
+            mb: 20,
+            // height: 100,
+            // width: 800,
+            height: 400,
+            width: '30%',
+          }}
+        >
+          <Container
+            maxWidth='lg'
+            sx={{ display: 'flex', justifyContent: 'center', pt: 3 }}
+          >
+            <form onSubmit={handleSubmit}>
+              {/* <Box sx={{ mb: 2 }}>
+                <TextField
+                  size='small'
+                  type='text'
+                  value={formData.image}
+                  onChange={handleChange}
+                  error={error}
+                  label='Image'
+                  name='image'
+                />
+              </Box> */}
+
+              <Box sx={{ mb: 2 }}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Stack spacing={3}>
+                    <DateTimePicker
+                      label='Date&Time picker'
+                      // value={value}
+                      onChange={handleChange}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </Stack>
+                </LocalizationProvider>
+              </Box>
+
+              <Box sx={{ mb: 2 }}>
+                <TextField
+                  size='small'
+                  type='number'
+                  value={formData.reps}
+                  onChange={handleChange}
+                  error={error}
+                  label='Weight Used (kg)'
+                  name='weightUsed'
+                />
+              </Box>
+
+              <Box sx={{ mb: 2 }}>
+                <TextField
+                  size='small'
+                  type='number'
+                  value={formData.reps}
+                  onChange={handleChange}
+                  error={error}
+                  label='Reps'
+                  name='reps'
+                />
+              </Box>
+
+              <Box sx={{ mb: 2 }}>
+                <TextField
+                  size='small'
+                  type='number'
+                  value={formData.sets}
+                  onChange={handleChange}
+                  error={error}
+                  label='Sets'
+                  name='sets'
+                />
+              </Box>
+
+              <Box sx={{ mb: 2 }}>
+                <TextField
+                  size='small'
+                  type='number'
+                  value={formData.rest}
+                  onChange={handleChange}
+                  error={error}
+                  label='Rest'
+                  name='rest'
+                />
+              </Box>
+
+              <Box sx={{ mb: 2 }}>
+                <TextField
+                  size='small'
+                  type='text'
+                  value={formData.difficulty}
+                  onChange={handleChange}
+                  error={error}
+                  label='Difficulty'
+                  name='difficulty'
+                />
+              </Box>
+
+              <Box sx={{ mb: 2 }}>
+                <TextField
+                  size='small'
+                  type='number'
+                  value={formData.totalTime}
+                  onChange={handleChange}
+                  error={error}
+                  label='Total Time'
+                  name='totalTime'
+                />
+              </Box>
+
+              <Box sx={{ mb: 2 }}>
+                <TextField
+                  size='small'
+                  type='number'
+                  value={formData.caloriesBurned}
+                  onChange={handleChange}
+                  error={error}
+                  label='Calories Burned'
+                  name='caloriesBurned'
+                />
+              </Box>
+
+              <Box>
+                <FormControl fullWidth>
+                  <InputLabel id='muscleGroup'>Muscle Group</InputLabel>
+                  <Select
+                    size='small'
+                    labelId='muscleGroup'
+                    value={formData.muscleGroup}
+                    label='Muscle Group'
+                    onChange={handleChange}
+                  >
+                    <MenuItem value=''>None</MenuItem>
+                    {muscleGroups.map((muscleGroup) => (
+                      <MenuItem key={muscleGroup._id} value={muscleGroup._id}>
+                        {muscleGroup.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+              <Button type='submit'>Create new workout</Button>
+            </form>
+          </Container>
+        </Box>
+        {/* End of table */}
+      </Box>
+    </>
+  );
+}

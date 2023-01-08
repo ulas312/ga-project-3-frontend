@@ -224,7 +224,7 @@ export default function WorkoutLog() {
                   value={formData.rest}
                   onChange={handleChange}
                   error={error}
-                  label='Rest'
+                  label='Rest (seconds)'
                   name='rest'
                 />
               </Box>

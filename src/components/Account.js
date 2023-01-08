@@ -35,11 +35,11 @@ const commonStyles = {
   height: '12.5rem',
 };
 
-function createData(name, height, weight, startWeight, goalWeight, bmi) {
-  return { name, height, weight, startWeight, goalWeight, bmi };
+// get height and weight from API
+function createData(height, weight, bmi) {
+  return { height, weight, bmi };
 }
-
-const rows = [createData('Ulas Temel', 181, 106, 110, 90, 32)];
+const rows = [createData(181, 106, 32)];
 
 const itemData = [
   {
@@ -96,7 +96,7 @@ const Account = () => (
           width: '70%',
         }}
       >
-        {/* Image slide */}
+        {/* Image slide - GET PROFILE PIC FROM API */}
         <Box>
           <Stack direction='row' spacing={2}>
             <ImageList
@@ -158,7 +158,7 @@ const Account = () => (
                   fontSize: 50,
                 }}
               >
-                {/* get names for API only username though */}
+                {/* get username for API*/}
                 Ulas Temel
               </Typography>
             </Box>
@@ -167,7 +167,7 @@ const Account = () => (
       </Box>
       {/* end of profile and user */}
 
-      {/* pink */}
+      {/* start of table */}
       <Box
         sx={{
           position: 'absolute',
@@ -180,35 +180,26 @@ const Account = () => (
           // height: 100,
           // width: 800,
           height: 400,
-          width: '50%',
+          width: '36%',
         }}
       >
-        <Grid sx={{ backgroundColor: 'pink' }}>
+        <Grid>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label='simple table'>
               <TableHead>
                 <TableRow>
-                  <TableCell></TableCell>
                   <TableCell align='left'>Height&nbsp;(cm)</TableCell>
                   <TableCell align='left'>Weight&nbsp;(kg)</TableCell>
-                  <TableCell align='left'>Starting Weight&nbsp;(kg)</TableCell>
-                  <TableCell align='left'>Goal Weight&nbsp;(kg)</TableCell>
                   <TableCell align='left'>BMI&nbsp;</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {rows.map((row) => (
                   <TableRow
-                    key={row.name}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component='th' scope='row'>
-                      {row.name}
-                    </TableCell>
                     <TableCell align='left'>&ensp;{row.height}</TableCell>
                     <TableCell align='left'>&ensp;{row.weight}</TableCell>
-                    <TableCell align='left'>&ensp;{row.startWeight}</TableCell>
-                    <TableCell align='left'>&ensp;{row.goalWeight}</TableCell>
                     <TableCell align='left'>&ensp;{row.bmi}</TableCell>
                   </TableRow>
                 ))}
@@ -217,7 +208,7 @@ const Account = () => (
           </TableContainer>
         </Grid>
       </Box>
-      {/* pink */}
+      {/* End of table */}
 
       <Grid
         container

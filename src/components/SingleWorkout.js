@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { ImageListItem } from '@mui/material';
+// import Likes from './common/Likes';
 
 import '../styles/images.scss';
 
@@ -36,7 +37,7 @@ export default function SingleWorkout() {
 
   return (
     <>
-      <div className='background'>
+      <div className='backgroundId'>
         <Container
           maxWidth='400px'
           sx={{ display: 'flex', pt: 15 }}
@@ -92,6 +93,7 @@ export default function SingleWorkout() {
           </Box>
           <ImageListItem key={singleWorkout?.image}>
             <img
+              className='singleCard'
               style={{
                 width: 800,
                 height: 400,
@@ -103,6 +105,7 @@ export default function SingleWorkout() {
               alt={singleWorkout?.name}
             />
           </ImageListItem>
+          <Container maxWidth='lg'> </Container>
         </Container>
       </div>
       <footer></footer>

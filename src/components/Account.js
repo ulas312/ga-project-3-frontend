@@ -173,7 +173,7 @@ const Account = () => (
           position: 'absolute',
           top: '50vh',
           justify: 'center',
-          left: '35%',
+          left: '38%',
           // zIndex: 'tooltip',
           mt: 4,
           mb: 20,

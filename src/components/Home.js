@@ -30,7 +30,7 @@ const Home = () => (
       >
         <Link
           style={{ color: 'inherit', textDecoration: 'inherit' }}
-          to='/workouts'
+          to='/workout-directory'
         >
           <Button
             className='homeButton'

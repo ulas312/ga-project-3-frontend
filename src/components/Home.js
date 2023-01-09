@@ -33,6 +33,7 @@ const Home = () => (
           to='/workouts'
         >
           <Button
+            className='homeButton'
             sx={{ border: 3 }}
             color='secondary'
             variant='outlined'

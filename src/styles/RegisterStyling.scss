@@ -1,6 +1,6 @@
-// img {
-//   margin-bottom: -900px;
-// }
+.form {
+  margin-bottom: -850px;
+}
 
 .textfield {
   background-color: white;
@@ -8,4 +8,15 @@
 
 .text {
   color: white;
+}
+
+button {
+  width: 150px;
+  height: 60px;
+  background-color: red;
+  color: white;
+  margin-top: -10px;
+  margin-left: 200px;
+  // border-radius: 17%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

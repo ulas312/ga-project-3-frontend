@@ -16,7 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Logo from '../assets/logo-small-white.png';
 
-const Navbar = () => {
+const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();

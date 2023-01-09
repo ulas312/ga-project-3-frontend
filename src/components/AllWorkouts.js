@@ -54,8 +54,8 @@ const AllWorkouts = ({ searchedWorkouts }) => {
   }, [searchedWorkouts]);
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate('/workouts/${id}');
+  const handleClick = (id) => {
+    navigate(`/workouts/${id}`);
   };
   return (
     <>

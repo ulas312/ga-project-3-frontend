@@ -120,7 +120,7 @@ const Account = () => (
       <Box
         sx={{
           position: 'absolute',
-          top: '59vh',
+          top: '47vh',
           justify: 'center',
           left: '15%',
           // zIndex: 'tooltip',
@@ -167,7 +167,7 @@ const Account = () => (
       <Box
         sx={{
           position: 'absolute',
-          top: '65vh',
+          top: '50vh',
           justify: 'center',
           left: '38%',
           mt: 4,

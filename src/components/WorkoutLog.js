@@ -53,14 +53,6 @@ export default function WorkoutLog() {
     return { name, weight, sets, reps, kcals };
   }
 
-  // const [images, setImages] = React.useState([]);
-  // const maxNumber = 69;
-  // const onChange = (imageList, addUpdateIndex) => {
-  //   // data for submit
-  //   console.log(imageList, addUpdateIndex);
-  //   setImages(imageList);
-  // };
-
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     dateTimePicker: '',
@@ -198,6 +190,7 @@ export default function WorkoutLog() {
                             <Select
                               size='small'
                               labelId='muscleGroup'
+                              id='muscleGroup'
                               value={formData.muscleGroup}
                               label='Muscle Group'
                               onChange={handleChange}
@@ -206,7 +199,7 @@ export default function WorkoutLog() {
                               {muscleGroups.map((muscleGroup) => (
                                 <MenuItem
                                   key={muscleGroup._id}
-                                  value={muscleGroup._id}
+                                  value={muscleGroup.name}
                                 >
                                   {muscleGroup.name}
                                 </MenuItem>

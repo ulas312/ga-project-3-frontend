@@ -26,8 +26,9 @@ const SelectedMuscleWorkoutsList = ({ searchedWorkouts }) => {
   console.log(selectedWorkouts);
 
   const goToSelectedWorkouts = () => {
+    console.log(selectedWorkouts);
     navigate({
-      pathname: '/workout-log/selected-workouts',
+      pathname: '/workout-log',
       search: `?${createSearchParams({
         selectedWorkouts: selectedWorkouts.join(','),
       })}`,
@@ -72,7 +73,10 @@ const SelectedMuscleWorkoutsList = ({ searchedWorkouts }) => {
                 color='secondary'
                 variant='outlined'
                 size='large'
-                onClick={handleSelect}
+                onClick={() => {
+                  console.log(workout._id);
+                  handleSelect(workout._id);
+                }}
               >
                 {workout.name}
               </Button>

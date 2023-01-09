@@ -5,6 +5,8 @@ import { NOTIFY } from '../lib/notifications';
 import { AUTH } from '../lib/auth';
 // import { useAuthenticated } from '../hooks/useAuthenticated';
 
+import LoginText from '../assets/login-black.png';
+
 import {
   // Avatar,
   Button,
@@ -40,7 +42,7 @@ const Login = () => {
       .then(({ data }) => {
         NOTIFY.SUCCESS('You are now logged in!');
         AUTH.setToken(data.token);
-        navigate('/workouts');
+        navigate('/workout-directory');
       })
       .catch((e) => {
         console.log(e);
@@ -57,97 +59,108 @@ const Login = () => {
   };
 
   return (
-    <Grid container component='main' sx={{ height: '100vh' }}>
-      <CssBaseline />
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage: 'url(https://i.postimg.cc/prYb3y3S/login.png)',
-          backgroundRepeat: 'no-repeat',
-          // backgroundColor: (t) =>
-          //   t.palette.mode === 'light'
-          //     ? t.palette.grey[50]
-          //     : t.palette.grey[900],
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <Box
+    <Box sx={{ backgroundColor: 'black', flexGrow: 1 }}>
+      <Grid container component='main' sx={{ height: '100vh' }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
           sx={{
-            my: 8,
-            mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            backgroundImage: 'url(https://i.postimg.cc/prYb3y3S/login.png)',
+            backgroundRepeat: 'no-repeat',
+            // backgroundColor: (t) =>
+            //   t.palette.mode === 'light'
+            //     ? t.palette.grey[50]
+            //     : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
-        >
-          {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}> */}
-          {/* <LockOutlinedIcon /> */}
-          {/* </Avatar> */}
-          <Typography component='h1' variant='h5'>
-            Log in
-          </Typography>
+        />
+
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
-            component='form'
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
           >
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              id='email'
-              type='email'
-              label='Email Address'
-              helperText={error.email && 'Incorrect E-mail Address'}
-              value={formFields.email}
-              onChange={handleChange}
-              error={error.email}
-              name='email'
-              autoComplete='email'
-              autoFocus
+            {/* <Typography component='h1' variant='h5'>
+              Log in
+            </Typography> */}
+            <Box
+              component='img'
+              sx={{
+                mt: 4,
+                mb: 4,
+                height: 100,
+                width: 400,
+              }}
+              alt='lLogin text'
+              src={LoginText}
             />
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              value={formFields.password}
-              onChange={handleChange}
-              error={error.password}
-              autoComplete='current-password'
-            />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2 }}
+            <Box
+              component='form'
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
             >
-              Log In
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link href='#' variant='body2'>
-                  {"Don't have an account? Register"}
-                </Link>
+              <TextField
+                margin='normal'
+                required
+                fullWidth
+                id='email'
+                type='email'
+                label='Email Address'
+                helperText={error.email && 'Incorrect E-mail Address'}
+                value={formFields.email}
+                onChange={handleChange}
+                error={error.email}
+                name='email'
+                autoComplete='email'
+                autoFocus
+              />
+              <TextField
+                margin='normal'
+                required
+                fullWidth
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                value={formFields.password}
+                onChange={handleChange}
+                error={error.password}
+                autoComplete='current-password'
+              />
+              <FormControlLabel
+                control={<Checkbox value='remember' color='primary' />}
+                label='Remember me'
+              />
+              <Button
+                type='submit'
+                fullWidth
+                variant='contained'
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Log In
+              </Button>
+              <Grid container>
+                <Grid item>
+                  <Link href='#' variant='body2'>
+                    {"Don't have an account? Register"}
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    </Box>
   );
 };
 

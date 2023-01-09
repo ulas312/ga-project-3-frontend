@@ -117,6 +117,36 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
                   </Typography>
                 </Link>
               </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link
+                  style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  to='/workout-directory'
+                >
+                  <Typography
+                    variant='h6'
+                    color='inherit'
+                    component='div'
+                    sx={{ mr: 2 }}
+                  >
+                    Muscle Groups
+                  </Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link
+                  style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  to='/workout-log'
+                >
+                  <Typography
+                    variant='h6'
+                    color='inherit'
+                    component='div'
+                    sx={{ mr: 2 }}
+                  >
+                    Workout Log
+                  </Typography>
+                </Link>
+              </MenuItem>
               {isLoggedIn ? (
                 <>
                   <MenuItem onClick={handleClose}>

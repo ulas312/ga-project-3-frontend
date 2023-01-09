@@ -138,7 +138,7 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
                   <MenuItem onClick={handleClose}>
                     <Link
                       style={{ color: 'inherit', textDecoration: 'inherit' }}
-                      to='workouts/account '
+                      to='/account '
                     >
                       <Typography
                         variant='h6'
@@ -148,7 +148,7 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
                       >
                         Account
                       </Typography>
-                    </Link>{' '}
+                    </Link>
                   </MenuItem>
                 </>
               ) : (

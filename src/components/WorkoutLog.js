@@ -4,18 +4,23 @@ import ImageUploading from 'react-images-uploading';
 
 import { useNavigate } from 'react-router-dom';
 import WorkoutLogText from '../assets/workout-log.png';
-import { API } from '../lib/api';
+import Logo from '../assets/logo-small-black.png';
+import UploadImagePng from '../assets/upload-image-white.png';
 
+import { API } from '../lib/api';
 import dayjs from 'dayjs';
 
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+
 import {
-  Container,
+  IconButton,
   Box,
   Card,
   CardContent,
+  CardMedia,
   Button,
   Typography,
   Grid,
@@ -48,13 +53,13 @@ export default function WorkoutLog() {
     return { name, weight, sets, reps, kcals };
   }
 
-  const [images, setImages] = React.useState([]);
-  const maxNumber = 69;
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
-    setImages(imageList);
-  };
+  // const [images, setImages] = React.useState([]);
+  // const maxNumber = 69;
+  // const onChange = (imageList, addUpdateIndex) => {
+  //   // data for submit
+  //   console.log(imageList, addUpdateIndex);
+  //   setImages(imageList);
+  // };
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -146,7 +151,7 @@ export default function WorkoutLog() {
                 position: 'absolute',
                 top: '25vh',
                 justify: 'center',
-                left: '4%',
+                left: '8.5%',
                 pt: 2,
                 pb: 2,
                 width: '60%',
@@ -156,7 +161,7 @@ export default function WorkoutLog() {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Stack spacing={3}>
                     <DateTimePicker
-                      label='Date&Time picker'
+                      label='Date & Time'
                       // value={value}
                       onChange={handleChange}
                       renderInput={(params) => <TextField {...params} />}
@@ -244,6 +249,7 @@ export default function WorkoutLog() {
                           />
                         </Box>
                       </TableCell>
+
                       <TableCell align='center'>
                         <Box
                           component='form'
@@ -282,7 +288,26 @@ export default function WorkoutLog() {
                     <TableRow>
                       <Box>
                         <Stack>
-                          <Button variant='contained' color='secondary'>
+                          <Button
+                            variant='text'
+                            color='error'
+                            type='submit'
+                            sx={{ width: '234.7%' }}
+                          >
+                            + ADD another exercise
+                          </Button>
+                        </Stack>
+                      </Box>
+                    </TableRow>
+                    <TableRow>
+                      <Box>
+                        <Stack>
+                          <Button
+                            variant='contained'
+                            color='secondary'
+                            type='submit'
+                            sx={{ width: '234.7%' }}
+                          >
                             Upload Workout
                           </Button>
                         </Stack>
@@ -301,53 +326,35 @@ export default function WorkoutLog() {
             xs={4}
             sx={{
               position: 'absolute',
-              top: '50vh',
+              top: '28vh',
               justify: 'center',
-              left: '78%',
-              pt: 2,
-              pb: 2,
-              width: '60%',
+              left: '72%',
             }}
           >
-            <div className='App'>
-              <ImageUploading
-                multiple
-                value={images}
-                onChange={onChange}
-                maxNumber={maxNumber}
-                dataURLKey='data_url'
-                acceptType={['jpg']}
+            <Stack direction='row' alignItems='center' spacing={2}>
+              <Button
+                variant='text'
+                component='label'
+                sx={{ fontSize: '50px' }}
               >
-                {({
-                  imageList,
-                  onImageUpload,
-                  onImageUpdate,
-                  isDragging,
-                  dragProps,
-                }) => (
-                  <div className='upload__image-wrapper'>
-                    <button
-                      style={isDragging ? { color: 'red' } : null}
-                      onClick={onImageUpload}
-                      {...dragProps}
-                    >
-                      Upload Image
-                    </button>
-                    &nbsp;
-                    {imageList.map((image, index) => (
-                      <div key={index} className='image-item'>
-                        <img src={image.data_url} alt='' width='100' />
-                        <div className='image-item__btn-wrapper'>
-                          <button onClick={() => onImageUpdate(index)}>
-                            Update
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </ImageUploading>
-            </div>
+                Upload&nbsp;your&nbsp;pump
+                <Box
+                  component='img'
+                  sx={{
+                    position: 'absolute',
+                    top: '8vh',
+                    justify: 'center',
+                    left: '19%',
+                    // mt: 2,
+                    height: 180,
+                    width: 200,
+                  }}
+                  alt='Workout log text'
+                  src={UploadImagePng}
+                />
+                <input hidden accept='image/*' multiple type='file' />
+              </Button>
+            </Stack>
           </Grid>
           {/* upload image */}
         </Grid>

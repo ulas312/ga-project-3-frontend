@@ -1,8 +1,8 @@
 import { useNavigate, createSearchParams } from 'react-router-dom';
-import { Button, Container, Grid } from '@mui/material';
+import { Box, Button, Container, Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { API } from '../lib/api';
-// import MuscleCard from './common/MuscleCard';
+import MuscleCard from './common/MuscleCard';
 
 const WorkoutDirectory = () => {
   const navigate = useNavigate();
@@ -26,6 +26,8 @@ const WorkoutDirectory = () => {
     });
   };
 
+  const gotToAllWorkouts = () => navigate('/workouts');
+
   useEffect(() => {
     API.GET(API.ENDPOINTS.workoutDirectory)
       .then(({ data }) => {
@@ -42,37 +44,48 @@ const WorkoutDirectory = () => {
 
   return (
     <>
-      <Container maxWidth='lg'>
-        <Grid container spacing={2}>
-          {workouts?.map((workout) => (
-            <Grid item xs={4} key={workout._id}>
-              {/* <MuscleCard
-                name={workout.name}
-                image={workout.image}
-                onClick={() => handleSelect(`${workout.name}`)}
-              /> */}
-              <Button
-                color='secondary'
-                variant='outlined'
-                name={workout.name}
-                image={workout.image}
-                onClick={() => handleSelect(`${workout.workout}`)}
-              >
-                {workout.name}
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-        <Button
-          sx={{ border: 3 }}
-          color='secondary'
-          variant='outlined'
-          size='large'
-          onClick={goToSelectedWorkouts}
-        >
-          Go To Exercises!
-        </Button>
-      </Container>
+      <Box sx={{ backgroundColor: 'black' }}>
+        <Container maxWidth='lg'>
+          <Grid container spacing={2}>
+            {workouts?.map((workout) => (
+              <Grid item xs={4} key={workout._id}>
+                <MuscleCard
+                  name={workout.name}
+                  image={workout.image}
+                  // onClick={() => handleSelect(`${workout.workout}`)}
+                />
+                <Button
+                  color='secondary'
+                  variant='outlined'
+                  name={workout.name}
+                  image={workout.image}
+                  onClick={() => handleSelect(`${workout.workout}`)}
+                >
+                  {workout.name}
+                </Button>
+              </Grid>
+            ))}
+          </Grid>
+          <Button
+            sx={{ border: 3 }}
+            color='secondary'
+            variant='outlined'
+            size='large'
+            onClick={goToSelectedWorkouts}
+          >
+            Submit
+          </Button>
+          <Button
+            sx={{ border: 3 }}
+            color='secondary'
+            variant='outlined'
+            size='large'
+            onClick={gotToAllWorkouts}
+          >
+            All Workouts
+          </Button>
+        </Container>
+      </Box>
     </>
   );
 };

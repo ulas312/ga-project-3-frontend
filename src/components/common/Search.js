@@ -61,7 +61,7 @@ function Search({ value, handleChange }) {
             <input
               type='search'
               className='searchInput'
-              placeholder='💪🏼...FIND YOUR WORKOUT...💪🏼'
+              placeholder='SEARCH FOR YOUR WORKOUT🔎'
               value={value}
               onChange={handleInputChange}
             />

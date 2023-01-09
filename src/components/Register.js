@@ -82,7 +82,7 @@ export default function Register() {
 
   return (
     <>
-      <img src={Abs} alt='pull-ups' />
+      <img className='form' src={Abs} alt='pull-ups' />
       <ThemeProvider theme={theme}>
         <Container component='main' maxWidth='xs'>
           <CssBaseline />
@@ -102,6 +102,7 @@ export default function Register() {
               Register{' '}
             </Typography>
             <Box
+              className='form'
               component='form'
               noValidate
               onSubmit={handleCreateUser}

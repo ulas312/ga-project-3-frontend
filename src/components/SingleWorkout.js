@@ -42,7 +42,7 @@ export default function SingleWorkout() {
   }, [id, isUpdated]);
 
   const goToDirectory = () => navigate('/workouts');
-  const logWorkout = () => navigate('/workout-log');
+  const workoutDirectory = () => navigate('/workout-directory');
 
   return (
     <>
@@ -68,7 +68,7 @@ export default function SingleWorkout() {
                 </Typography>
 
                 <Typography color='gray' sx={{ fontSize: 15 }}>
-                  Aim for: {singleWorkout?.reps} reps /{singleWorkout?.sets}{' '}
+                  Aim for: {singleWorkout?.reps} reps /{singleWorkout?.sets}
                   sets
                 </Typography>
 
@@ -106,8 +106,8 @@ export default function SingleWorkout() {
                   VIDEO RELEASES - COMING SOON, SIGN UP NOW
                 </button>
 
-                <button className='signUp' onClick={logWorkout}>
-                  LOG WORKOUT
+                <button className='signUp' onClick={workoutDirectory}>
+                  WORKOUT DIRECTORY{' '}
                 </button>
               </CardActions>
             </Box>

@@ -42,7 +42,7 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static' color='error'>
+      <AppBar position='fixed' color='error'>
         <Toolbar>
           {/* logo */}
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>

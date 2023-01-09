@@ -95,7 +95,7 @@ const Login = () => {
             <Box
               component='img'
               sx={{
-                mt: 4,
+                mt: 20,
                 mb: 4,
                 height: 100,
                 width: 400,

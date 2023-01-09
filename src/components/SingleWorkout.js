@@ -34,6 +34,7 @@ export default function SingleWorkout() {
   }, [id, isUpdated]);
 
   const goToDirectory = () => navigate('/workouts');
+  const logWorkout = () => navigate('/workout-log');
 
   return (
     <>
@@ -89,6 +90,12 @@ export default function SingleWorkout() {
               <Button className='Button' size='small' onClick={goToDirectory}>
                 🔙
               </Button>
+              <button className='signUp'>
+                VIDEO RELEASES - COMING SOON, SIGN UP NOW
+              </button>
+              <button className='signUp' onClick={logWorkout}>
+                LOG WORKOUT
+              </button>
             </CardActions>
           </Box>
           <ImageListItem key={singleWorkout?.image}>

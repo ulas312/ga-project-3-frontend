@@ -12,6 +12,7 @@ import Register from './components/Register';
 import Account from './components/Account';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import 'react-toastify/dist/ReactToastify.css';
+import SelectedMuscleWorkoutsList from './components/SelectedMuscleWorkoutsList';
 
 const theme = createTheme({
   palette: {
@@ -59,9 +60,13 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/workout-directory' element={<WorkoutDirectory />} />
           <Route path='/workouts' element={<AllWorkouts />} />
+          <Route path='workouts/:id' element={<SingleWorkout />} />
+          <Route
+            path='workout-directory/workouts'
+            element={<SelectedMuscleWorkoutsList />}
+          />
           <Route path='/workouts/create' element={<CreateWorkout />} />
           <Route path='workout-log' element={<WorkoutLog />} />
-          <Route path='workouts/:id' element={<SingleWorkout />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/account' element={<Account />} />

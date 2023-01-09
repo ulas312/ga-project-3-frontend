@@ -42,7 +42,7 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static' color='error'>
+      <AppBar position='fixed' color='error'>
         <Toolbar>
           {/* logo */}
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
@@ -114,6 +114,36 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
                     sx={{ mr: 2 }}
                   >
                     Workouts
+                  </Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link
+                  style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  to='/workout-directory'
+                >
+                  <Typography
+                    variant='h6'
+                    color='inherit'
+                    component='div'
+                    sx={{ mr: 2 }}
+                  >
+                    Muscle Groups
+                  </Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link
+                  style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  to='/workout-log'
+                >
+                  <Typography
+                    variant='h6'
+                    color='inherit'
+                    component='div'
+                    sx={{ mr: 2 }}
+                  >
+                    Workout Log
                   </Typography>
                 </Link>
               </MenuItem>

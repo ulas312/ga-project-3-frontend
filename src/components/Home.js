@@ -34,7 +34,13 @@ const Home = () => (
         >
           <Button
             className='homeButton'
-            sx={{ border: 3 }}
+            sx={{
+              border: 3,
+              fontSize: 32,
+              width: 200,
+              height: 60,
+              pt: 2,
+            }}
             color='secondary'
             variant='outlined'
             size='large'
@@ -45,7 +51,7 @@ const Home = () => (
       </Box>
       <Box
         sx={{
-          position: 'absolute',
+          // position: 'absolute',
           top: 0,
           // left: '50%',
           zIndex: 'modal',
